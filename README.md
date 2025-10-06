@@ -1,59 +1,81 @@
 # 🧱 Stack - 2 - JavaFX
+### 🧩 Verificador de código balanceado con paréntesis, llaves y corchetes
 
-Este proyecto implementa una pequeña aplicación en **JavaFX** que permite **comprobar si un código está balanceado** en cuanto al uso de paréntesis `(` y `)`.
+</div>
 
-La interfaz gráfica está desarrollada con **FXML**, mientras que la lógica de validación se realiza mediante una clase personalizada llamada `Pila`, basada en el uso del tipo de datos abstracto **Stack (Pila LIFO)**.
+Este proyecto implementa una aplicación en **JavaFX** que permite **comprobar si un código está correctamente balanceado** en el uso de:
+
+- Paréntesis `()`
+- Llaves `{ }`
+- Corchetes `[ ]`
+
+La interfaz está desarrollada con **FXML**, mientras que la lógica de validación se implementa mediante una clase personalizada `Pila`, basada en el TAD **Stack (LIFO)**.
 
 ---
 
 ## 🚀 Tecnologías utilizadas
-- **Java 25**
-- **JavaFX**
-- **FXML**
-- **Paradigma orientado a objetos**
+
+- ☕ **Java 25**
+- 🎨 **JavaFX**
+- 🧾 **FXML**
+- 🧠 **Programación orientada a objetos**
 
 ---
 
 ## 🧩 Descripción general
 
-La aplicación permite al usuario ingresar un bloque de texto (por ejemplo, un fragmento de código) y verificar si los **paréntesis están correctamente balanceados**.  
-Si el código está incompleto o vacío, se muestran alertas informativas para guiar al usuario.
+La aplicación permite al usuario pegar o escribir un fragmento de código y:
+
+1. **Contabilizar** cuántos elementos de apertura (`(`, `{`, `[`) contiene.
+2. **Verificar** si los símbolos de apertura y cierre están **correctamente emparejados y balanceados**.
+3. **Mostrar alertas** si el código está vacío o presenta errores.
+
+Esto resulta útil para analizar código fuente y comprender cómo funciona internamente una **pila de control de símbolos** — uno de los fundamentos de los compiladores y analizadores sintácticos.
 
 ---
 
 ## ⚙️ Clases principales
 
 ### 🧠 `Clases.Pila`
-Implementa una estructura de **pila genérica de caracteres** para comprobar la correcta apertura y cierre de paréntesis.
 
-**Funciones clave:**
-- `push(Character c)`: Inserta un carácter en la pila.
-- `pop()`: Extrae el último carácter insertado (lanza excepción si la pila está vacía).
-- `balanceado(String codigo)`: Recorre el código y verifica si los paréntesis están correctamente emparejados.
+Implementa una estructura de **pila genérica de caracteres** que gestiona la apertura y cierre de los símbolos.
 
-**Ventajas:**
-- Permite aislar la lógica del análisis del código.
-- Representa de forma práctica el funcionamiento del TAD *Stack* (último en entrar, primero en salir).
-- Puede ser extendida fácilmente para manejar otros símbolos (`{}`, `[]`, `<>`).
+#### 🔧 Métodos principales:
+
+| Método | Descripción |
+|--------|--------------|
+| `push(Character c)` | Inserta un carácter en la pila. |
+| `pop()` | Extrae el último carácter insertado (lanza excepción si la pila está vacía). |
+| `esVacia()` | Indica si la pila está vacía. |
+| `balanceado(String codigo)` | Verifica si los símbolos están correctamente balanceados (`()`, `{}`, `[]`). |
+| `contarAperturas(String codigo)` | Devuelve el número de cada símbolo de apertura encontrado. |
+
+#### 🧠 Ventajas:
+- Simula el funcionamiento real del **TAD Stack (Last In, First Out)**.
+- Aísla la lógica de validación del entorno gráfico.
+- Facilita la **extensión del programa** a otros símbolos o reglas de validación.
 
 ---
 
 ### 🖥️ `VentanaController`
-Controlador JavaFX que enlaza los elementos del FXML con la lógica de la aplicación.
+
+Controlador JavaFX encargado de conectar la interfaz con la lógica de negocio.
 
 **Responsabilidades:**
 - Capturar el texto ingresado por el usuario.
-- Llamar al método `balanceado()` de la clase `Pila`.
-- Mostrar el resultado en pantalla.
-- Desplegar alertas si el campo está vacío o si el código presenta errores.
+- Contabilizar símbolos de apertura mediante `contarAperturas()`.
+- Verificar balanceo con `balanceado()`.
+- Mostrar resultados o alertas según corresponda.
 
 ---
 
 ### 🎨 `Ventana.fxml`
-Archivo FXML que define la interfaz de usuario:
-- Un **TextArea** para ingresar el código.
-- Un **Button** para comprobar el estado del código.
-- Un **Label** que muestra el resultado.
-- Colores y tipografía aplicados para resaltar la estructura visual.
+
+Define la interfaz gráfica de la aplicación:
+
+- 🧾 **TextArea** para ingresar el código.
+- 🧮 **Label/Area de resultados** con el conteo de símbolos y estado del balanceo.
+- 🖱️ **Button** para ejecutar la comprobación.
+- 🎨 Estilo visual minimalista con tipografía clara y colores de contraste.
 
 ---
