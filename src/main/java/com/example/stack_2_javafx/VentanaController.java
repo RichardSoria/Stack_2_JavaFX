@@ -40,14 +40,12 @@ public class VentanaController {
                 return;
             }
 
-            if (pila.balanceado(codigo)) {
-                lblResultado.setText("El código está balanceado");
-            } else {
-                lblResultado.setText("El código no está balanceado");
-            }
+            String resultado = pila.balanceado(codigo);
+            lblResultado.setText(resultado);
 
         } catch (Exception ex) {
             lblResultado.setText(ex.getMessage());
         }
     }
+
 }
